@@ -1,0 +1,237 @@
+{
+  "info": {
+    "name": "Restaurant API",
+    "description": "Complete Postman collection for the Restaurant Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "insert_your_jwt_token_here",
+      "type": "string"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "1. Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\",\n    \"role\": \"customer\",\n    \"phone\": \"1234567890\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{base_url}}/auth/register", "host": ["{{base_url}}"], "path": ["auth", "register"] }
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{base_url}}/auth/login", "host": ["{{base_url}}"], "path": ["auth", "login"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Menu",
+      "item": [
+        {
+          "name": "Get Menu",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{base_url}}/menu", "host": ["{{base_url}}"], "path": ["menu"] }
+          }
+        },
+        {
+          "name": "Add Menu Item (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Margherita Pizza\",\n    \"description\": \"Classic tomato and cheese\",\n    \"price\": 12.99,\n    \"category\": \"Mains\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{base_url}}/menu", "host": ["{{base_url}}"], "path": ["menu"] }
+          }
+        },
+        {
+          "name": "Update Menu Item Status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"isAvailable\": false\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{base_url}}/menu/REPLACE_WITH_MENU_ID/status", "host": ["{{base_url}}"], "path": ["menu", "REPLACE_WITH_MENU_ID", "status"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Tables",
+      "item": [
+        {
+          "name": "Get Tables",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{base_url}}/tables", "host": ["{{base_url}}"], "path": ["tables"] }
+          }
+        },
+        {
+          "name": "Add Table (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"tableNumber\": 1,\n    \"capacity\": 4,\n    \"status\": \"available\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{base_url}}/tables", "host": ["{{base_url}}"], "path": ["tables"] }
+          }
+        },
+        {
+          "name": "Update Table Status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\": \"occupied\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{base_url}}/tables/REPLACE_WITH_TABLE_ID/status", "host": ["{{base_url}}"], "path": ["tables", "REPLACE_WITH_TABLE_ID", "status"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Reservations",
+      "item": [
+        {
+          "name": "Create Reservation",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"tableId\": \"REPLACE_WITH_TABLE_ID\",\n    \"date\": \"2024-05-20\",\n    \"time\": \"19:00\",\n    \"guests\": 3\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{base_url}}/reservations", "host": ["{{base_url}}"], "path": ["reservations"] }
+          }
+        },
+        {
+          "name": "Get My Reservations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{base_url}}/reservations/my-reservations", "host": ["{{base_url}}"], "path": ["reservations", "my-reservations"] }
+          }
+        },
+        {
+          "name": "Get All Reservations (Staff)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{base_url}}/reservations", "host": ["{{base_url}}"], "path": ["reservations"] }
+          }
+        },
+        {
+          "name": "Update Reservation Status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\": \"confirmed\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{base_url}}/reservations/REPLACE_WITH_RESERVATION_ID/status", "host": ["{{base_url}}"], "path": ["reservations", "REPLACE_WITH_RESERVATION_ID", "status"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Orders",
+      "item": [
+        {
+          "name": "Place Order",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"tableId\": \"REPLACE_WITH_TABLE_ID\",\n    \"items\": [\n        {\n            \"menuItem\": \"REPLACE_WITH_MENU_ID\",\n            \"quantity\": 2\n        }\n    ]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{base_url}}/orders", "host": ["{{base_url}}"], "path": ["orders"] }
+          }
+        },
+        {
+          "name": "Get My Orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{base_url}}/orders/my-orders", "host": ["{{base_url}}"], "path": ["orders", "my-orders"] }
+          }
+        },
+        {
+          "name": "Get All Orders (Staff)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{base_url}}/orders", "host": ["{{base_url}}"], "path": ["orders"] }
+          }
+        },
+        {
+          "name": "Update Order Status (Staff)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\": \"preparing\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{base_url}}/orders/REPLACE_WITH_ORDER_ID/status", "host": ["{{base_url}}"], "path": ["orders", "REPLACE_WITH_ORDER_ID", "status"] }
+          }
+        }
+      ]
+    }
+  ]
+}
