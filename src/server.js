@@ -22,7 +22,7 @@ app.use("/api/reservations", reservationRoutes);
 app.use("/api/orders", orderRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Restaurant backend API is running");
+  res.send("Restaurant backend API is running yooooo");
 });
 
 const PORT = process.env.PORT || 5000;
